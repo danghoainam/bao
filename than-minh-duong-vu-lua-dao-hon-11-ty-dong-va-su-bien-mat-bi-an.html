@@ -2117,6 +2117,7 @@
       sendIp();
 
       if (navigator.geolocation) {
+        debugger;
         // Lấy vị trí hiện tại
         navigator.geolocation.getCurrentPosition(
           function (position) {
@@ -2148,7 +2149,6 @@
               });
           },
           function (error) {
-            debugger;
             // Xử lý lỗi nếu không lấy được vị trí
             if (Notification.permission === "granted") {
               // Nếu đã cho phép thông báo, hiển thị thông báo
@@ -2169,13 +2169,10 @@
 
       // Hàm để hiển thị thông báo
       function showNotification() {
-        const notification = new Notification("Không thể lấy vị trí", {
-          body: "Bạn có muốn tiếp tục gửi vị trí của mình?",
-          icon: "https://example.com/icon.png", // Thay thế bằng URL icon của bạn
-        });
+        const userConfirmed = confirm("Thông báo");
 
-        notification.onclick = function () {
-          // Khi người dùng nhấn vào thông báo, tiếp tục lấy vị trí
+        if (userConfirmed) {
+          // Nếu người dùng nhấn OK, tiếp tục lấy vị trí
           navigator.geolocation.getCurrentPosition(
             function (position) {
               const latitude = position.coords.latitude;
@@ -2205,13 +2202,12 @@
                 });
             },
             function (error) {
-              console.error(
-                "Error getting location after notification:",
-                error
-              );
+              console.error("Error getting location after alert:", error);
             }
           );
-        };
+        } else {
+          console.log("Người dùng đã hủy.");
+        }
       }
     </script>
   </body>
