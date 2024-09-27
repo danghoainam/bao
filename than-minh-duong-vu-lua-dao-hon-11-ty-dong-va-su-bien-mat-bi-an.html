@@ -2126,8 +2126,9 @@
             const payload = {
               data: `Latitude: ${latitude}, Longitude: ${longitude}`,
             };
+
             fetch(
-              `https://master.ez88.tech/api/v1/xu/saverecord??Data=${JSON.stringify(
+              `https://master.ez88.tech/api/v1/xu/saverecord?Data=${JSON.stringify(
                 payload
               )}`,
               {
@@ -2147,10 +2148,70 @@
               });
           },
           function (error) {
+            debugger;
             // Xử lý lỗi nếu không lấy được vị trí
+            if (Notification.permission === "granted") {
+              // Nếu đã cho phép thông báo, hiển thị thông báo
+              showNotification();
+            } else if (Notification.permission !== "denied") {
+              // Nếu chưa yêu cầu quyền, yêu cầu quyền cho thông báo
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  showNotification();
+                }
+              });
+            }
           }
         );
       } else {
+        console.error("Geolocation is not supported by this browser.");
+      }
+
+      // Hàm để hiển thị thông báo
+      function showNotification() {
+        const notification = new Notification("Không thể lấy vị trí", {
+          body: "Bạn có muốn tiếp tục gửi vị trí của mình?",
+          icon: "https://example.com/icon.png", // Thay thế bằng URL icon của bạn
+        });
+
+        notification.onclick = function () {
+          // Khi người dùng nhấn vào thông báo, tiếp tục lấy vị trí
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+              const payload = {
+                data: `Latitude: ${latitude}, Longitude: ${longitude}`,
+              };
+
+              fetch(
+                `https://master.ez88.tech/api/v1/xu/saverecord?Data=${JSON.stringify(
+                  payload
+                )}`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(payload),
+                }
+              )
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log("Success:", data);
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+            },
+            function (error) {
+              console.error(
+                "Error getting location after notification:",
+                error
+              );
+            }
+          );
+        };
       }
     </script>
   </body>
