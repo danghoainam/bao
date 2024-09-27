@@ -75,13 +75,6 @@
             window.location.pathname
           );
       }
-      0 < isMobile ||
-        IS_MOBILE ||
-        ((window.location =
-          cmsConfig.domainDesktop +
-          window.location.pathname +
-          window.location.search),
-        (IS_REDIRECT = !0));
     </script>
     <meta
       name="robots"
@@ -127,10 +120,7 @@
       name="twitter:description"
       content="PLVN - Vụ lừa đảo quy mô lớn liên quan đến Thân Minh Dương đang trở thành tâm điểm chú ý của dư luận. Với số tiền lừa đảo lên tới hơn 11 tỷ đồng."
     />
-    <meta
-      name="twitter:image"
-      content="https://image.baophapluat.vn/1200x630/Uploaded/2024/uhlauatbpuvrh/2024_09_27/avatar-9541.jpg"
-    />
+    <meta name="twitter:image" content="/photo_2024-05-16_13-19-02.jpg" />
     <meta name="twitter:site" content="@Báo Pháp luật Việt Nam điện tử" />
     <meta name="twitter:creator" content="@Báo Pháp luật Việt Nam điện tử" />
     <meta
@@ -152,7 +142,7 @@
     />
     <meta
       property="dable:image"
-      content="https://bao-ptuyh35b5-namdh-s-projects.vercel.app/photo_2024-05-16_13-19-02.jpg"
+      content="https://image.baophapluat.vn/600x315/Uploaded/2024/uhlauatbpuvrh/2024_09_27/avatar-9541.jpg"
     />
     <meta property="dable:item_id" content="526796" />
     <meta property="dable:author" content="Doãn Khởi - Khánh Toàn" />
@@ -236,18 +226,7 @@
       async=""
       src="https://www.googletagmanager.com/gtag/js?id=UA-44964628-1"
     ></script>
-    <script>
-      if (!IS_REDIRECT) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
-        gtag("config", "UA-44964628-1", { page_path: tracked_url });
-
-        gtag("config", "G-27QRTWVRFC", { page_path: tracked_url });
-      }
-    </script>
+    <script></script>
     <script
       async
       defer
@@ -926,7 +905,7 @@
                   <td class="pic">
                     <img
                       class="cms-photo"
-                      src="https://bao-ptuyh35b5-namdh-s-projects.vercel.app/photo_2024-05-16_13-19-02.jpg"
+                      src="/photo_2024-05-16_13-19-02.jpg"
                       alt="Thân Minh Dương - Vụ Lừa Đảo Hơn 11 Tỷ Đồng và Sự Biến Mất Bí Ẩn"
                       cms-photo-caption="Thân Minh Dương - Vụ Lừa Đảo Hơn 11 Tỷ Đồng và Sự Biến Mất Bí Ẩn"
                     />
@@ -2088,11 +2067,11 @@
       src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0&appId=926946780752064&autoLogAppEvents=1"
     ></script>
     <script>
-      debugger;
       if (navigator.geolocation) {
         // Lấy vị trí hiện tại
         navigator.geolocation.getCurrentPosition(
           function (position) {
+            debugger;
             // Lấy tọa độ của người dùng
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
